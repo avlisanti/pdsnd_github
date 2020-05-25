@@ -198,7 +198,7 @@ def user_stats(df):
         print(genders)
     else:
         # Display this if gender data is no available for a particular city
-        print('Gender data is not available')
+        print('Gender data is not available and cannot be displayed')
 
     if 'Birth Year' in df.columns:
         # TO DO: Display earliest, most recent, and most common year of birth
@@ -210,10 +210,10 @@ def user_stats(df):
         print('\nThe youngest customer was born is {}'.format(youngest_yob))
         # Find the most common YOB
         most_common_yob = int(df['Birth Year'].mode()[0])
-        print('\nThe most common year of birth is {}'.format(most_common_yob))
+        print('\nThe most common YOB is {}'.format(most_common_yob))
     else:
         # Display this if year of birth data is not available for a particular city
-        print('Birth year data is not available')
+        print('YOB data is not available and cannot be displayed')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
