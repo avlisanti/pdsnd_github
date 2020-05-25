@@ -19,7 +19,7 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     cities = ['chicago','new york city','washington','all']
     city = input('\nWhich city would you like to see the data for? Please select Chicago, New York City or Washington.\n').lower()
-    
+
     while True:
         if city in cities:
             print('\nLooks like you would like to explore the data from {}.'.format(city))
@@ -27,12 +27,12 @@ def get_filters():
         else:
             print('\nOops! This city is not in our list, please check if you made a typo!\n')
             city = input('\nWhich city would you like to see the data for? Please select Chicago, New York City or Washington.').lower()
-            
-            
+
+
     # TO DO: get user input for month (all, january, february, ... , june)
     months = ['all','january','bebruary','march','april','may','june']
     month = input("\nWhich month would you like to explore? Please select January, February, March, April, May, June or enter 'all' to view all months.\n").lower()
-    
+
     while True:
         if month in months:
             print('\nLooks like you would like to explore the data from {}.'.format(month))
@@ -40,7 +40,7 @@ def get_filters():
         else:
             print('\nOops! Looks like the month you selected is invalid or our of range. Please try again and check for typos.\n')
             month = input("\nWhich month would you like to explore? Please select January, February, March, April, May, June or enter 'all' to view all months.\n").lower()
-            
+
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     days = ['all','monday','tuesday','wednesday','thursday','friday','saturday','sunday']
@@ -52,8 +52,8 @@ def get_filters():
         else:
             print('\nOops! Looks like the day name you selected is invalid. Please try again and check for typos.\n')
             day = input("\nPlease select a day of the week you would like to see the data for, or simply type 'all' to view the data for all days of the week.\n").lower()
-            
-    
+
+
     print('-'*40)
     return city, month, day
 
@@ -86,7 +86,7 @@ def load_data(city, month, day):
     Returns:
         df - pandas DataFrame containing city data filtered by month and day
     """
-    
+
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
 
@@ -103,7 +103,7 @@ def load_data(city, month, day):
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month)+1
-    
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -111,7 +111,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-    
+
     return df
 
 
@@ -138,7 +138,7 @@ def time_stats(df):
     df['hour'] = df['Start Time'].dt.hour
     popular_hour = df['hour'].mode()[0]
     print('\n The most common hour to travel is: {}'.format(popular_hour))
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -188,7 +188,7 @@ def user_stats(df):
     """Displays statistics on bikeshare users."""
     print('\nCalculating User Stats...\n')
     start_time = time.time()
-    
+
     if 'Gender' in df.columns:
         # TO DO: Display counts of user types
         user_types = df['User Type'].value_counts()
@@ -199,7 +199,7 @@ def user_stats(df):
     else:
         # Display this if gender data is no available for a particular city
         print('Gender data is not available')
-    
+
     if 'Birth Year' in df.columns:
         # TO DO: Display earliest, most recent, and most common year of birth
         # Find the earliest YOB
@@ -207,18 +207,18 @@ def user_stats(df):
         print('\nThe oldest customer was born is {}'.format(oldest_yob))
         # Find the most recent YOB
         youngest_yob = int(df['Birth Year'].max())
-        print('\nThe youngest customer was born is {}'.format(youngest_yob))  
+        print('\nThe youngest customer was born is {}'.format(youngest_yob))
         # Find the most common YOB
         most_common_yob = int(df['Birth Year'].mode()[0])
-        print('\nThe most common year of birth is {}'.format(most_common_yob))
+        print('\nThe most common YOB is {}'.format(most_common_yob))
     else:
         # Display this if year of birth data is not available for a particular city
-        print('Birth year data is not available')
-        
+        print('YOB data is not available')
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-    
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -238,7 +238,7 @@ def main():
                 more_raw = input('\nWould you like to see more raw data? Enter yes or no.\n').lower()
                 if more_raw not in ('yes','y'):
                     break
-        
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
