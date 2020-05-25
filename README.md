@@ -5,7 +5,7 @@ Created on Saturday, 24May2020
 Bikeshare Python Project
 
 ### Description
-Exploring bikeshare data.
+Exploring bikeshare data to provide interactive experience so they can view statistics for different cities.
 
 ### Files used
 chicago.csv
